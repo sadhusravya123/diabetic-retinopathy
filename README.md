@@ -133,4 +133,3 @@ The notebook also includes a model comparison section and Grad-CAM explainabilit
 - Validate the model on diverse retinal image datasets.
 
 
-*Disclaimer: This project is intended for educational and research purposes only.*
