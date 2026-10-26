@@ -15,7 +15,7 @@ Diabetic retinopathy is an eye complication associated with diabetes that can le
 - Visualize model attention using Grad-CAM.
 - Compare different model training strategies.
 
-## 🧠 Severity Classes
+## Severity Classes
 
 The model predicts one of the following classes:
 
@@ -29,7 +29,7 @@ The model predicts one of the following classes:
 
 The project also focuses on **referable diabetic retinopathy**, defined here as Moderate or worse.
 
-## 🛠️ Technologies Used
+##  Technologies Used
 
 - Python
 - TensorFlow / Keras
@@ -40,7 +40,7 @@ The project also focuses on **referable diabetic retinopathy**, defined here as 
 - KaggleHub
 - Google Colab
 
-## 📂 Dataset
+##  Dataset
 
 The project uses the APTOS-derived, 224 × 224 Gaussian-filtered diabetic retinopathy dataset.
 
@@ -48,7 +48,7 @@ The project uses the APTOS-derived, 224 × 224 Gaussian-filtered diabetic retino
 
 The dataset is downloaded using KaggleHub and organized into five class folders.
 
-## ⚙️ Methodology
+## Methodology
 
 ### 1. Data Preparation
 - Download the dataset using KaggleHub.
@@ -75,7 +75,7 @@ Compare the experimental training strategies using the evaluation outputs genera
 ### 7. Grad-CAM Explainability
 Generate Grad-CAM visualizations to highlight image regions contributing to the final model's predictions.
 
-## 🚀 How to Run the Project
+## How to Run the Project
 
 The recommended environment is Google Colab.
 
@@ -87,7 +87,7 @@ The recommended environment is Google Colab.
 6. If Google Drive saving is enabled, authorize access when prompted.
 7. Review the training results, model comparison, and Grad-CAM visualizations.
 
-## 📦 Installation
+## Installation
 
 Install the main dependencies using:
 
@@ -95,7 +95,7 @@ Install the main dependencies using:
 pip install tensorflow numpy pandas matplotlib seaborn scikit-learn kagglehub
 ```
 
-## 📊 Experiments
+## Experiments
 
 The notebook contains four main experiments:
 
@@ -106,7 +106,7 @@ The notebook contains four main experiments:
 
 The notebook also includes a model comparison section and Grad-CAM explainability.
 
-## 🌟 Key Features
+## Key Features
 
 - Transfer learning with a pretrained CNN.
 - Five-class severity classification.
@@ -117,14 +117,14 @@ The notebook also includes a model comparison section and Grad-CAM explainabilit
 - Grad-CAM visual explanations.
 - Reproducible train-validation splitting.
 
-## ⚠️ Limitations
+## Limitations
 
 - Performance depends on dataset quality, class distribution, and training configuration.
 - Validation results may not reflect performance on images from other hospitals or populations.
 - Grad-CAM provides visual explanations but does not establish clinical correctness.
 - The model is an educational and research prototype, not a substitute for professional medical diagnosis.
 
-## 🔮 Future Improvements
+## Future Improvements
 
 - Evaluate performance on an independent test dataset.
 - Add sensitivity, specificity, macro F1-score, and per-class evaluation.
