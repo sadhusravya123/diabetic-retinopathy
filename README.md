@@ -1,135 +1,81 @@
-#  Diabetic Retinopathy Severity Classification Using Deep Learning
-
-A deep learning project that classifies diabetic retinopathy severity from retinal fundus images using **EfficientNetB0 and transfer learning**. The project explores different training strategies to address class imbalance and uses Grad-CAM to visualize image regions influencing model predictions.
+# Explainable AI for Diabetic Retinopathy Screening
 
 ##  Project Overview
+This project uses Deep Learning to classify Diabetic Retinopathy (DR) severity from retinal fundus images. It compares three models and uses Grad-CAM to visualize the regions influencing model predictions.
 
-Diabetic retinopathy is an eye complication associated with diabetes that can lead to vision loss if not identified and managed appropriately. This project uses deep learning to classify retinal images into five severity levels.
-
-###  Objectives
-
-- Classify retinal fundus images into five diabetic retinopathy severity categories.
-- Apply transfer learning using the EfficientNetB0 pretrained CNN.
-- Investigate class imbalance using class-weighted loss and balanced sampling.
-- Improve feature learning through fine-tuning.
-- Visualize model attention using Grad-CAM.
-- Compare different model training strategies.
-
-## Severity Classes
-
-The model predicts one of the following classes:
-
-| Class | Description |
-|---|---|
-| `No_DR` | No diabetic retinopathy |
-| `Mild` | Mild diabetic retinopathy |
-| `Moderate` | Moderate diabetic retinopathy |
-| `Severe` | Severe diabetic retinopathy |
-| `Proliferate_DR` | Proliferative diabetic retinopathy |
-
-The project also focuses on **referable diabetic retinopathy**, defined here as Moderate or worse.
-
-##  Technologies Used
-
-- Python
-- TensorFlow / Keras
-- EfficientNetB0
-- NumPy and Pandas
-- Matplotlib and Seaborn
-- Scikit-learn
-- KaggleHub
-- Google Colab
+##  Objectives
+- Classify retinal images into five DR severity levels.
+- Compare a custom CNN, EfficientNetB0, and ResNet50.
+- Evaluate models using Accuracy, Precision, Recall, Macro-F1, and Quadratic Weighted Kappa (QWK).
+- Visualize model predictions using Grad-CAM.
+- Flag low-confidence predictions for additional review.
 
 ##  Dataset
+**APTOS 2019 Blindness Detection Dataset**
 
-The project uses the APTOS-derived, 224 × 224 Gaussian-filtered diabetic retinopathy dataset.
+The dataset contains 3,662 labelled retinal images divided into five classes:
 
-**Dataset source:** [Diabetic Retinopathy 224×224 Gaussian Filtered — Kaggle](https://www.kaggle.com/datasets/sovitrath/diabetic-retinopathy-224x224-gaussian-filtered)
+| Label | DR Severity |
+|---|---|
+| 0 | No DR |
+| 1 | Mild |
+| 2 | Moderate |
+| 3 | Severe |
+| 4 | Proliferative DR |
 
-The dataset is downloaded using KaggleHub and organized into five class folders.
+Dataset split:
+- Training: 70%
+- Validation: 15%
+- Testing: 15%
+
+## 🛠️ Technologies Used
+- Python
+- PyTorch
+- Torchvision
+- NumPy and Pandas
+- Pillow (PIL)
+- Scikit-learn
+- Matplotlib and Seaborn
+- Google Colab with GPU acceleration
+
+##  Models Implemented
+1. **Custom CNN:** Baseline model trained from scratch.
+2. **EfficientNetB0:** Transfer learning followed by fine-tuning.
+3. **ResNet50:** Transfer learning with a frozen feature extractor.
 
 ## Methodology
+1. Load and validate the dataset.
+2. Resize images to 224 × 224 pixels.
+3. Split the data using stratified sampling.
+4. Apply image transformations and normalization.
+5. Train the models using class-weighted cross-entropy loss.
+6. Evaluate model performance on the test set.
+7. Generate confusion matrices and performance comparisons.
+8. Apply Grad-CAM for visual explanations.
+9. Flag predictions with confidence below 0.60 for review.
 
-### 1. Data Preparation
-- Download the dataset using KaggleHub.
-- Load images at 224 × 224 resolution.
-- Split the dataset into 80% training and 20% validation sets.
-- Use a fixed random seed for reproducibility.
-- Analyze class distribution and calculate class weights.
+## Results
 
-### 2. Baseline Model
-Use a pretrained EfficientNetB0 backbone with frozen feature-extraction layers, data augmentation, and categorical classification.
+| Model | Accuracy | Macro-F1 |
+|---|---:|---:|
+| Custom CNN | 0.67 | 0.45 |
+| EfficientNetB0 (Fine-tuned) | 0.73 | 0.58 |
+| ResNet50 | 0.68 | 0.49 |
 
-### 3. Class-Weighted Training
-Apply class weights to reduce the influence of the dataset's class imbalance. Compare training with and without data augmentation.
+**Best-performing model:** Fine-tuned EfficientNetB0, achieving 73% test accuracy and a 0.58 Macro-F1 score.
 
-### 4. Fine-Tuning
-Unfreeze the last 30 backbone layers while keeping Batch Normalization layers frozen. Continue training with a low learning rate.
-
-### 5. Balanced Sampling
-Continue training using balanced sampling that oversamples minority classes during batch generation.
-
-### 6. Model Comparison
-Compare the experimental training strategies using the evaluation outputs generated by the notebook.
-
-### 7. Grad-CAM Explainability
-Generate Grad-CAM visualizations to highlight image regions contributing to the final model's predictions.
-
-## How to Run the Project
-
-The recommended environment is Google Colab.
-
-1. Clone or download this repository.
-2. Open `Diabetic_Retinopathy_DL_organized.ipynb` in Google Colab.
-3. Ensure the required Python packages are available.
-4. Configure Kaggle dataset access if prompted.
+##  How to Run
+1. Open the project notebook in Google Colab.
+2. Download the APTOS 2019 Blindness Detection dataset from Kaggle.
+3. Upload or mount the dataset in the Colab environment.
+4. Update the dataset paths if required.
 5. Run the notebook cells sequentially.
-6. If Google Drive saving is enabled, authorize access when prompted.
-7. Review the training results, model comparison, and Grad-CAM visualizations.
+6. Review the model metrics, confusion matrices, training curves, and Grad-CAM visualizations.
 
-## Installation
-
-Install the main dependencies using:
-
-```bash
-pip install tensorflow numpy pandas matplotlib seaborn scikit-learn kagglehub
-```
-
-## Experiments
-
-The notebook contains four main experiments:
-
-1. Baseline EfficientNetB0 with frozen backbone.
-2. Class-weighted training, with and without augmentation.
-3. Fine-tuning the final backbone layers.
-4. Balanced sampling for minority classes.
-
-The notebook also includes a model comparison section and Grad-CAM explainability.
-
-## Key Features
-
-- Transfer learning with a pretrained CNN.
-- Five-class severity classification.
-- Class imbalance analysis and mitigation.
-- Data augmentation.
-- Fine-tuning for feature adaptation.
-- Balanced sampling.
-- Grad-CAM visual explanations.
-- Reproducible train-validation splitting.
-
-## Limitations
-
-- Performance depends on dataset quality, class distribution, and training configuration.
-- Validation results may not reflect performance on images from other hospitals or populations.
-- Grad-CAM provides visual explanations but does not establish clinical correctness.
-- The model is an educational and research prototype, not a substitute for professional medical diagnosis.
-
-## Future Improvements
-
-- Evaluate performance on an independent test dataset.
-- Add sensitivity, specificity, macro F1-score, and per-class evaluation.
-- Explore additional pretrained CNN architectures.
-- Deploy the trained model through a web application.
-- Validate the model on diverse retinal image datasets.
-
+##Future Enhancements
+- Explore Vision Transformers and hybrid architectures.
+- Improve confidence calibration and uncertainty estimation.
+- Incorporate lesion-level segmentation.
+- Validate models on independent retinal image datasets.
+- Evaluate generalization across different cameras and patient populations.
 
